@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import ExWebView from 'react-native-fe-webview';
 
 export default function App() {
@@ -6,8 +6,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ExWebView />
+      <Text>1111</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

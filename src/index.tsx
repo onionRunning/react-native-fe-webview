@@ -11,11 +11,13 @@ const ExWebView = () => {
     console.log(event)
   }
 
-  return <View>
-    <MaxWebView ref={(f: any) => (inputRef.current = f)}
-  style={{flex: 1}}
-  onEventChange={onChange} />
-  </View>
+  return (
+    <View>
+      <MaxWebView ref={(f: any) => (inputRef.current = f)}
+    style={{flex: 1}}
+    onEventChange={onChange} />
+    </View>
+  )
 }
 
 export default ExWebView
