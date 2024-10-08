@@ -1,8 +1,21 @@
-import { NativeModules } from 'react-native';
+import { useRef } from 'react';
+import {requireNativeComponent, View} from 'react-native';
 
-const FeWebview = NativeModules.FeWebview
+const MaxWebView = requireNativeComponent('MaxWebView') as React.ComponentType<any>
 
 
-export function multiply(a: number, b: number): Promise<number> {
-  return FeWebview.multiply(a, b);
+const ExWebView = () => {
+  const inputRef = useRef<any>({})
+
+  const onChange = (event: any) => {
+    console.log(event)
+  }
+
+  return <View>
+    <MaxWebView ref={(f: any) => (inputRef.current = f)}
+  style={{flex: 1}}
+  onEventChange={onChange} />
+  </View>
 }
+
+export default ExWebView
