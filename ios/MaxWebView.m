@@ -22,7 +22,7 @@
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     [config setURLSchemeHandler:self forURLScheme:@"localfiles"];
     if (self = [super initWithFrame:frame configuration:config]) {
-        [self loadFile];
+      [self loadURL];
         [self.configuration.userContentController addScriptMessageHandler:self name:@"bridge"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShown:) name:UIKeyboardDidShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHidden:) name:UIKeyboardDidHideNotification object:nil];
@@ -34,12 +34,28 @@
     return nil;
 }
 
+- (void)setUrl:(NSString *)url {
+    _url = url;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      [self loadURL];
+    });
+}
+
+- (void)loadURL {
+  if (self.url != nil) {
+    NSURL *url = [NSURL URLWithString:self.url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self loadRequest:request];
+  } else {
+    NSLog(@"url is empty");
+  }
+}
+
 - (void)loadFile {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
     if (!path) {
         return;
     }
-
     NSURL *localHTMLUrl = [NSURL fileURLWithPath:path isDirectory:NO];
     NSURLComponents *components = [NSURLComponents componentsWithURL:localHTMLUrl resolvingAgainstBaseURL:NO];
     if (components) {

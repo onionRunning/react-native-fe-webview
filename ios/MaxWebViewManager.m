@@ -20,6 +20,10 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(onEventChange, RCTBubblingEventBlock)
+RCT_CUSTOM_VIEW_PROPERTY(url, NSString, MaxWebView)
+{
+  view.url = json;
+}
 
 RCT_EXPORT_METHOD(processData:(nonnull NSNumber *)tag dictionary:(NSDictionary *)dictionary) {
   [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {

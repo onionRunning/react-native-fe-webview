@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MaxWebView : WKWebView
 
 @property (nonatomic, copy) RCTBubblingEventBlock onEventChange;
+@property (nonatomic, strong) NSString *url;
 
 - (void)openKeyboard;
 - (void)closeKeyboard;

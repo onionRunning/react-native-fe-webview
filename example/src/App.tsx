@@ -5,6 +5,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+            <Text>1111</Text>
+
       <ExWebView />
       <Text>1111</Text>
     </View>
@@ -14,8 +16,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     backgroundColor: '#ecf0f1'
   },
   box: {
