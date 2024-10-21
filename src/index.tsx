@@ -13,7 +13,7 @@ const ExWebView = () => {
 
   return (
     <View style={{height: 500, width: 500, backgroundColor: 'red'}} >
-      <MaxWebView ref={(f: any) => (inputRef.current = f)} style={{height: 500, width: 500}} onEventChange={onChange} url={"https://www.baidu.com"}/>
+      <MaxWebView ref={(f: any) => (inputRef.current = f)} style={{height: 500, width: 500}} onEventChange={onChange} url={"editor"}/>
     </View>
   )
 }

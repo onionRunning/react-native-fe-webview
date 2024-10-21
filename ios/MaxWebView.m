@@ -43,16 +43,20 @@
 
 - (void)loadURL {
   if (self.url != nil) {
-    NSURL *url = [NSURL URLWithString:self.url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self loadRequest:request];
+    if ([self.url hasPrefix:@"http"]) {
+      NSURL *url = [NSURL URLWithString:self.url];
+      NSURLRequest *request = [NSURLRequest requestWithURL:url];
+      [self loadRequest:request];
+    } else {
+      [self loadFile:self.url]; // url 要么http 要么本地文件名
+    }
   } else {
     NSLog(@"url is empty");
   }
 }
 
-- (void)loadFile {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
+- (void)loadFile:(NSString *)name {
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"html"];
     if (!path) {
         return;
     }
