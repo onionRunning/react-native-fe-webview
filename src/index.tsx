@@ -1,5 +1,6 @@
+import React, { useImperativeHandle } from 'react';
 import { useRef } from 'react';
-import {requireNativeComponent} from 'react-native';
+import {findNodeHandle, requireNativeComponent, UIManager} from 'react-native';
 
 const MaxWebView = requireNativeComponent('MaxWebView') as React.ComponentType<any>
 
@@ -10,13 +11,26 @@ interface Props {
   onEventMessage?: (event: any) => void
 }
 
-const ExWebView = (props: Props) => {
+const ExWebView = React.forwardRef((props: Props, ref) => {
   const webviewRef = useRef<any>({})
   const {url, style} = props
 
+  useImperativeHandle(ref, () => {
+    return {onPostMessage}
+  }, [])
+  
   const onEventMessage = (event: any) => {
-    // console.log(event)
     props?.onEventMessage?.(event)
+  }
+
+  // 可以发给H5 定义类型 和参数 
+  const onPostMessage = (payload: {type: string, params: any}) => {
+    console.warn('我执行了么', payload)
+    UIManager?.dispatchViewManagerCommand?.(
+      findNodeHandle?.(webviewRef?.current),
+      UIManager?.getViewManagerConfig?.('MaxWebView')?.Commands?.processData!,
+      [payload],
+    )
   }
 
   return (
@@ -27,6 +41,6 @@ const ExWebView = (props: Props) => {
       url={url}
     />
   )
-}
+})
 
 export default ExWebView

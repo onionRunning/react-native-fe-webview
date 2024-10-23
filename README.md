@@ -9,7 +9,6 @@ react-native-webview + quill.js 搭配是可以完成客户端的富文本编辑
 - [x] 支持访问本地资源
 - [x] 支持访问远程资源
 - [x] 支持简化通信
-- [x] 支持自定义H5编辑器样式
 
 ## Installation
 
@@ -33,13 +32,9 @@ const App = () => {
       // 支持基本样式  
       style={style}
       // 编辑器ref用于和编辑器的通信交互  
-      ref={webviewRef}  
-      // 是否是远程资源
-      isRemote={true}
-      // 远程资源地址
-      source={{uri: 'https://www.baidu.com'}}
-      // 本地资源地址
-      filePath={'assets/index.html'}
+      ref={webviewRef}
+      // 支持https在线链接 & 本地资源  
+      url={url}
       // 通信函数
       onMessage={(event) => {
         console.log(event.nativeEvent.data)
