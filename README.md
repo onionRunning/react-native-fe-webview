@@ -9,6 +9,9 @@ react-native-webview + quill.js 搭配是可以完成客户端的富文本编辑
 - [x] 支持访问本地资源
 - [x] 支持访问远程资源
 - [x] 支持简化通信
+- [x] 支持加载在线HTML
+- [x] 支持加载本地HTML
+
 
 ## Installation
 
@@ -27,6 +30,21 @@ import {MaxWebView} from 'react-native-fe-webview'
 
 const App = () => {
   const webviewRef = useRef(null)
+
+  // 键盘是单独针对编辑器处理的所以特殊处理了下， 非编辑器的常规使用： onPostMessage/onMessage 即可
+  
+  const closeKeyBoard = () => {
+    webviewRef.current?.closeKeyBoard()
+  }
+  const openKeyBoard = () => {
+    webviewRef.current?.openKeyBoard()
+  }
+
+  const initData = () => {
+    //payload {type: '', params: []} 
+    inputRef.current.onPostMessage(payload)
+  }
+
   return (
     <MaxWebView
       // 支持基本样式  
@@ -44,3 +62,8 @@ const App = () => {
 }
 
 ```
+
+ps. 加载本地html 目前的处理方案是分别在 ios/android 项目的根目录放置我们的html 比如 xx.html 
+
+我们实际使用项目中 需要用到 url={'xx'} 来映射到对应的html
+

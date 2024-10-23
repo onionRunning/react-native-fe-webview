@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ExWebView ref={webviewRef} url={'index'} style={{flex: 1}} onEventMessage={onEventMessage} />
+      <ExWebView ref={webviewRef} url={'http://192.168.31.11:5500/example/assets/index.html'} style={{flex: 1}} onEventMessage={onEventMessage} />
     </View>
   )
 }

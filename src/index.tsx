@@ -16,7 +16,7 @@ const ExWebView = React.forwardRef((props: Props, ref) => {
   const {url, style} = props
 
   useImperativeHandle(ref, () => {
-    return {onPostMessage}
+    return {onPostMessage, closeKeyBoard, openKeyBoard}
   }, [])
   
   const onEventMessage = (event: any) => {
@@ -25,11 +25,29 @@ const ExWebView = React.forwardRef((props: Props, ref) => {
 
   // 可以发给H5 定义类型 和参数 
   const onPostMessage = (payload: {type: string, params: any}) => {
-    console.warn('我执行了么', payload)
+    // console.warn('我执行了么', payload)
     UIManager?.dispatchViewManagerCommand?.(
       findNodeHandle?.(webviewRef?.current),
       UIManager?.getViewManagerConfig?.('MaxWebView')?.Commands?.processData!,
       [payload],
+    )
+  }
+
+  const closeKeyBoard = () => {
+    if (webviewRef.current) {
+      UIManager?.dispatchViewManagerCommand?.(
+        findNodeHandle?.(webviewRef.current),
+        UIManager.getViewManagerConfig('CustomWebView').Commands.closeKeyboard!,
+        [],
+      )
+    }
+  }
+
+  const openKeyBoard = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(webviewRef.current),
+      UIManager.getViewManagerConfig('CustomWebView').Commands.openKeyboard!,
+      [],
     )
   }
 
