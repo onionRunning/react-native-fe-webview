@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ExWebView from 'react-native-fe-webview';
 
 export default function App() {
 
+
+  // H5 -> Client 
+  const onEventMessage = (e: any) => {
+    console.log('e-----', JSON.parse(e.nativeEvent.data))
+  }
+
   return (
     <View style={styles.container}>
-            <Text>1111</Text>
-
-      <ExWebView />
-      <Text>1111</Text>
+      <ExWebView url={'http://192.168.31.11:5500/example/assets/index.html'} style={{flex: 1}} onEventMessage={onEventMessage} />
     </View>
   )
 }
