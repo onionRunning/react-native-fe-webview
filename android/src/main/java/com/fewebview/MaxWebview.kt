@@ -1,4 +1,4 @@
-package com.fewebview.MaxWebView
+package com.fewebview
 
 import android.annotation.SuppressLint
 import android.webkit.JavascriptInterface
@@ -19,7 +19,7 @@ class MaxWebView(val context: ReactContext) : WebView(context) {
     settings.javaScriptEnabled = true
     addJavascriptInterface(AndroidBridge(context, this), "webkit")
     settings.allowFileAccess = true
-    loadUrl("file:///android_asset/editor.html")
+    // loadUrl("file:///android_asset/editor.html")
   }
 
   fun processData(data: ReadableArray?) {

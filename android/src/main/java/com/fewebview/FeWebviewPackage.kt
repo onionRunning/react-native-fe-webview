@@ -11,7 +11,12 @@ class FeWebviewPackage : ReactPackage {
     return listOf(FeWebviewModule(reactContext))
   }
 
+  // override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+  //   return emptyList()
+  // }
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    return emptyList()
-  }
+    val viewManagers: MutableList<ViewManager<*, *>> = ArrayList()
+    viewManagers.add(MaxWebViewManager(reactContext))
+    return viewManagers
+}
 }

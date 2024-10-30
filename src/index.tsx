@@ -1,8 +1,8 @@
-import React, { useImperativeHandle } from 'react';
+import React, {useImperativeHandle} from 'react';
 import { useRef } from 'react';
 import {findNodeHandle, requireNativeComponent, UIManager} from 'react-native';
 
-const MaxWebView = requireNativeComponent('MaxWebView') as React.ComponentType<any>
+const MaxWebView = requireNativeComponent('MaxWebView') as any
 
 interface Props {
   // webview 需要加载的地址 支持
@@ -14,11 +14,10 @@ interface Props {
 const ExWebView = React.forwardRef((props: Props, ref) => {
   const webviewRef = useRef<any>({})
   const {url, style} = props
-
   useImperativeHandle(ref, () => {
     return {onPostMessage, closeKeyBoard, openKeyBoard}
   }, [])
-  
+
   const onEventMessage = (event: any) => {
     props?.onEventMessage?.(event)
   }

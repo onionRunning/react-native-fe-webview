@@ -7,7 +7,7 @@ export default function App() {
 
   useEffect(()=> {
     setTimeout(() => {
-      webviewRef.current?.onPostMessage?.({type: 'insertImages', params: [{url: 'https://www.baidu.com'}]})
+      webviewRef.current?.onPostMessage?.({type: 'insertImages', params: [{url: 'https://www.gstatic.com/devrel-devsite/prod/v0e3f58103119c4df6fb3c3977dcfd0cb669bdf6385f895761c1853a4b0b11be9/web/images/lockup.svg'}]})
     }, 3000)
   }, [])
 
@@ -19,10 +19,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ExWebView 
-        // ref={webviewRef} 
-        // url={'http://192.168.31.11:5500/example/assets/index.html'} 
-        // style={{flex: 1}} 
-        // onEventMessage={onEventMessage} 
+        ref={webviewRef} 
+        url={'http://192.168.31.11:5500/packages/editor/example/dist/index.html'} 
+        style={{flex: 1}} 
+        onEventMessage={onEventMessage} 
       />
     </View>
   )
