@@ -25,7 +25,7 @@ class MaxWebView(val context: ReactContext) : WebView(context) {
   fun processData(data: ReadableArray?) {
     if (data != null && data.size() > 0 && data.getType(0) == ReadableType.Map) {
       val map = data.getMap(0)
-      val jsonObject = (map.toHashMap() as Map<*, *>?)?.let { JSONObject(it) }
+      val jsonObject = (map?.toHashMap() as Map<*, *>?)?.let { JSONObject(it) }
       evaluateJavascript(
         "javascript:try{window.webkit.onMessage(`$jsonObject`);}catch(e){console.error(e)}",
         null
